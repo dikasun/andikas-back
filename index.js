@@ -3,23 +3,23 @@ const app = express();
 
 require('dotenv').config();
 const cors = require('cors');
-const port = process.env.PORT || '3000';
+const PORT = process.env.PORT || '3000';
 
+const client = require('./src/databases/client');
 const routes = require('./src/routes/index.route');
 
-function main() {
-    app.use(cors({
-        origin: 'https://andikas.pages.dev'
-    }));
-    // app.use(cors());
+function runApp() {
+    app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use(routes);
+    app.use('/andikas', routes);
 
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
+    client.connect().then((_) => {
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        })
+    })
 }
 
 
-main();
+runApp();
