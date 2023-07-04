@@ -18,10 +18,7 @@ exports.getProfile = async () => {
 exports.getSkills = async () => {
     try {
         const collection = database.collection("skills");
-        const options = {
-            sort: { id: 1 },
-        };
-        const skills = collection.find({}, options);
+        const skills = collection.find().toArray();
 
         return skills;
     } catch (error) {
@@ -32,10 +29,7 @@ exports.getSkills = async () => {
 exports.getExperiences = async () => {
     try {
         const collection = database.collection("experiences");
-        const options = {
-            sort: { id: 1 },
-        };
-        const experiences = collection.find({}, options);
+        const experiences = collection.find().toArray();
 
         return experiences;
     } catch (error) {
@@ -45,11 +39,8 @@ exports.getExperiences = async () => {
 
 exports.getEducation = async () => {
     try {
-        const collection = database.collection("education");
-        const options = {
-            sort: { id: 1 },
-        };
-        const education = collection.find({}, options);
+        const collection = database.collection("educations");
+        const education = await collection.find().toArray();
 
         return education;
     } catch (error) {

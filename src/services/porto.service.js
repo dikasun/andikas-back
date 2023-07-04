@@ -6,10 +6,7 @@ const database = client.db(DB_NAME);
 exports.getCertifications = async () => {
     try {
         const collection = database.collection("certifications");
-        const options = {
-            sort: { id: 1 },
-        };
-        const certifications = collection.find({}, options);
+        const certifications = collection.find().toArray();
 
         return certifications;
     } catch (error) {
@@ -20,10 +17,7 @@ exports.getCertifications = async () => {
 exports.getProjects = async () => {
     try {
         const collection = database.collection("projects");
-        const options = {
-            sort: { id: 1 },
-        };
-        const projects = collection.find({}, options);
+        const projects = collection.find().toArray();
 
         return projects;
     } catch (error) {
